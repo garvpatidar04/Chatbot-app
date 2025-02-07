@@ -74,13 +74,13 @@ def detect_hallucination(text):
 def generate_questions(tech_stack, position):
     prompt = f"""Generate 3 technical interview questions for a {position} position requiring {tech_stack}:
     1. Basic concept question
-    2. Intermediate problem-solving question
-    3. Advanced system design/scenario question
+    2. Intermediate problem-solving question on given position and tech stack
+    3. Advanced question on given position and tech stack 
     
-    Format: Separate questions with '|||'"""
+    Provide only the questions, separated by '0sep0', without any extra text."""
     
     response = model.generate_content(prompt).text
-    return [q.strip() for q in response.split("|||")[:3]]
+    return [q.strip() for q in response.split("0sep0")]
 
 def evaluate_answer(question, answer):
     evaluation_prompt = f"""Evaluate this technical answer on a scale of 0-10:
